@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rivas — Rediseño (POC)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0A; --bg-2:#0E0F0E; --surface:#121312;
+    --ink:#F4F5F1; --dim:#9A9E96; --mute:#5A5D57;
+    --signal:#B6FF3B; --signal-deep:#8FdF1f;
+    --line:rgba(255,255,255,0.10); --line-soft:rgba(255,255,255,0.055);
+    --glass-bg:rgba(20,22,20,0.55); --glass-brd:rgba(255,255,255,0.12);
+    --display:'Space Grotesk',sans-serif; --body:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:300;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.5;
+  }
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--signal);color:#0A0A0A}
+
+  /* ---- shared type ---- */
+  .mono{font-family:var(--mono);font-weight:400;text-transform:uppercase;letter-spacing:0.16em;font-size:11px}
+  .idx{color:var(--signal)}
+  h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-0.03em;line-height:1.02}
+  .wrap{max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,56px)}
+  .hairline{height:1px;background:var(--line);border:0}
+
+  /* ---- glass utility ---- */
+  .glass{
+    background:var(--glass-bg);
+    -webkit-backdrop-filter:blur(16px) saturate(150%);backdrop-filter:blur(16px) saturate(150%);
+    border:1px solid var(--glass-brd);
+  }
+
+  /* ---- header ---- */
+  header{position:fixed;top:0;left:0;right:0;z-index:100}
+  .bar{
+    margin:14px auto 0;max-width:1320px;width:calc(100% - 28px);
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+    padding:12px 14px 12px 20px;border-radius:2px;
+  }
+  .brand{display:flex;align-items:center;gap:13px}
+  .brand img{height:34px;width:auto;display:block}
+  .brand .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:0.18em;color:var(--dim);text-transform:uppercase;line-height:1.35;border-left:1px solid var(--line);padding-left:12px}
+  nav{display:flex;gap:30px;align-items:center}
+  nav a{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--dim);display:flex;gap:7px;align-items:baseline;transition:color .18s}
+  nav a .n{color:var(--mute);font-size:9px}
+  nav a:hover{color:var(--ink)}
+  nav a.active{color:var(--ink)}
+  nav a.active .n{color:var(--signal)}
+  .cta{
+    font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--ink);padding:11px 18px;border-radius:2px;display:inline-flex;align-items:center;gap:9px;
+    transition:.2s;white-space:nowrap;
+  }
+  .cta .dot{width:6px;height:6px;background:var(--signal);border-radius:50%;box-shadow:0 0 10px var(--signal)}
+  .cta:hover{background:var(--signal);color:#0A0A0A;border-color:var(--signal)}
+  .cta:hover .dot{background:#0A0A0A;box-shadow:none}
+  @media(max-width:860px){nav{display:none}}
+
+  /* ---- hero ---- */
+  .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;background:center/cover no-repeat url("assets/photos/hero.jpg");filter:grayscale(0.55) contrast(1.06) brightness(0.72)}
+  .hero-veil{position:absolute;inset:0;background:
+      linear-gradient(90deg,rgba(10,10,10,0.92) 0%,rgba(10,10,10,0.55) 45%,rgba(10,10,10,0.30) 100%),
+      linear-gradient(0deg,rgba(10,10,10,0.96) 0%,rgba(10,10,10,0.35) 42%,rgba(10,10,10,0.10) 100%)}
+  /* blueprint grid + corner ticks */
+  .grid-motif{position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(var(--line-soft) 1px,transparent 1px),linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);
+    background-size:100% 25%,25% 100%;opacity:.6;mix-blend-mode:screen}
+  .tick{position:absolute;width:14px;height:14px;pointer-events:none;opacity:.6}
+  .tick::before,.tick::after{content:"";position:absolute;background:var(--signal)}
+  .tick::before{width:14px;height:1px;top:0}.tick::after{height:14px;width:1px;left:0}
+  .tick.tr{top:96px;right:22px;transform:scaleX(-1)}
+  .tick.bl{left:22px;bottom:22px;transform:scaleY(-1)}
+  .hero-inner{position:relative;z-index:2;padding-bottom:0}
+  .hero-kicker{display:flex;gap:14px;align-items:center;margin-bottom:26px;color:var(--dim)}
+  .hero h1{font-size:clamp(40px,7vw,96px);font-weight:600;max-width:14ch}
+  .hero h1 em{font-style:normal;color:var(--signal)}
+  .hero-sub{color:var(--dim);font-size:clamp(14px,1.5vw,16.5px);max-width:52ch;margin:26px 0 34px;line-height:1.7}
+  .hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:44px}
+  .btn-solid{background:var(--signal);color:#0A0A0A;font-family:var(--mono);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;padding:15px 26px;border-radius:2px;font-weight:500;transition:.2s;display:inline-flex;gap:10px;align-items:center}
+  .btn-solid:hover{background:#fff}
+  .btn-ghost{font-family:var(--mono);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink);padding:15px 22px;border:1px solid var(--line);border-radius:2px;transition:.2s}
+  .btn-ghost:hover{border-color:var(--signal);color:var(--signal)}
+  /* spec strip */
+  .spec-strip{position:relative;z-index:2;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);margin-bottom:26px}
+  .spec-strip .cell{padding:24px 24px 24px 0;border-right:1px solid var(--line)}
+  .spec-strip .cell:not(:first-child){padding-left:24px}
+  .spec-strip .cell:last-child{border-right:0;padding-right:0}
+  .spec-strip .k{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--mute);margin-bottom:8px}
+  .spec-strip .v{font-family:var(--display);font-size:clamp(18px,2vw,24px);font-weight:500;letter-spacing:-0.02em}
+  .spec-strip .v small{color:var(--signal);font-size:0.6em;font-weight:400}
+  @media(max-width:760px){.spec-strip{grid-template-columns:repeat(2,1fr)}.spec-strip .cell{border-bottom:1px solid var(--line)}}
+
+  /* ---- feature section ---- */
+  section.feat{border-top:1px solid var(--line);padding:clamp(70px,9vw,130px) 0}
+  .feat-head{display:flex;align-items:baseline;gap:18px;margin-bottom:56px}
+  .feat-head .big-idx{font-family:var(--mono);font-size:13px;color:var(--signal);letter-spacing:0.1em}
+  .feat-head h2{font-size:clamp(30px,4.5vw,56px)}
+  .feat-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(32px,5vw,80px);align-items:center}
+  @media(max-width:900px){.feat-grid{grid-template-columns:1fr}}
+  .frame{position:relative;border:1px solid var(--line);padding:10px;background:var(--bg-2)}
+  .frame img{display:block;width:100%;height:clamp(300px,42vw,480px);object-fit:cover;filter:grayscale(0.35) contrast(1.04)}
+  .frame .cnr{position:absolute;width:10px;height:10px;border:1px solid var(--signal)}
+  .frame .cnr.tl{top:-1px;left:-1px;border-right:0;border-bottom:0}
+  .frame .cnr.br{bottom:-1px;right:-1px;border-left:0;border-top:0}
+  .frame .plate{position:absolute;bottom:18px;left:18px;font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink);background:var(--glass-bg);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid var(--glass-brd);padding:7px 11px}
+  .feat-body .lbl{color:var(--dim);margin-bottom:22px}
+  .feat-body p.lead{color:var(--dim);font-size:15.5px;line-height:1.8;margin-bottom:34px;max-width:44ch}
+  .datarows{border-top:1px solid var(--line);margin-bottom:36px}
+  .datarows .row{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:15px 0;border-bottom:1px solid var(--line)}
+  .datarows .row .rk{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dim)}
+  .datarows .row .rv{font-family:var(--mono);font-size:12px;color:var(--ink)}
+  .datarows .row .rv b{color:var(--signal);font-weight:500}
+
+  /* ---- floating whatsapp ---- */
+  .fab{position:fixed;right:22px;bottom:22px;z-index:120;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;transition:.22s}
+  .fab svg{width:26px;height:26px;fill:var(--signal);transition:.22s}
+  .fab:hover{background:var(--signal);border-color:var(--signal);transform:translateY(-2px)}
+  .fab:hover svg{fill:#0A0A0A}
+  .fab .ping{position:absolute;inset:0;border-radius:50%;border:1px solid var(--signal);opacity:0;animation:ping 3s ease-out infinite}
+  @keyframes ping{0%{transform:scale(1);opacity:.5}80%,100%{transform:scale(1.6);opacity:0}}
+  @media(prefers-reduced-motion:reduce){.ping{animation:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar glass">
+    <div class="brand">
+      <img src="assets/logo-rivas.png" alt="Renta de Maquinaria Rivas">
+      <span class="tag">Renta de Maquinaria<br>Puebla · Desde 1999</span>
+    </div>
+    <nav>
+      <a class="active" href="#"><span class="n">01</span> Inicio</a>
+      <a href="#feat"><span class="n">02</span> Equipos</a>
+      <a href="#"><span class="n">03</span> Nosotros</a>
+      <a href="#"><span class="n">04</span> Contacto</a>
+    </nav>
+    <a class="cta glass" href="https://wa.me/522223200109" target="_blank"><span class="dot"></span> Cotizar</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-veil"></div>
+  <div class="grid-motif"></div>
+  <span class="tick tr"></span><span class="tick bl"></span>
+  <div class="wrap hero-inner">
+    <div class="hero-kicker">
+      <span class="mono"><span class="idx">01</span> / Puebla y región centro</span>
+      <span class="hairline" style="flex:1;max-width:120px"></span>
+      <span class="mono">Est. 1999</span>
+    </div>
+    <h1>Energía que <em>no se detiene</em></h1>
+    <p class="hero-sub">Renta, venta, servicio técnico y refacciones de plantas de luz y maquinaria para construcción. Equipos listos para obra, industria, gobierno y eventos.</p>
+    <div class="hero-actions">
+      <a class="btn-solid" href="https://wa.me/522223200109" target="_blank">Solicitar cotización →</a>
+      <a class="btn-ghost" href="#feat">Ver equipos</a>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="spec-strip">
+      <div class="cell"><div class="k">Capacidad</div><div class="v">45–700 <small>kVA</small></div></div>
+      <div class="cell"><div class="k">Motor</div><div class="v">Diésel</div></div>
+      <div class="cell"><div class="k">Entrega</div><div class="v">En sitio</div></div>
+      <div class="cell"><div class="k">Experiencia</div><div class="v">+25 <small>años</small></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="feat" id="feat">
+  <div class="wrap">
+    <div class="feat-head">
+      <span class="big-idx">02 /</span>
+      <h2>Plantas de luz</h2>
+    </div>
+    <div class="feat-grid">
+      <div class="frame">
+        <span class="cnr tl"></span><span class="cnr br"></span>
+        <img src="assets/photos/planta-destacada.jpg" alt="Planta de luz industrial diésel">
+        <span class="plate">Shindaiwa · Diésel · En operación</span>
+      </div>
+      <div class="feat-body">
+        <div class="lbl mono">Respaldo · Obra · Industria · Eventos</div>
+        <p class="lead">La energía no puede detener tu operación. Plantas de luz para obras, empresas, industria, respaldo y emergencias, con entrega e instalación en sitio.</p>
+        <div class="datarows">
+          <div class="row"><span class="rk">Rango de capacidad</span><span class="rv"><b>45–700 kVA</b></span></div>
+          <div class="row"><span class="rk">Combustible</span><span class="rv">Diésel bajo consumo</span></div>
+          <div class="row"><span class="rk">Instalación</span><span class="rv">En sitio</span></div>
+          <div class="row"><span class="rk">Mantenimiento</span><span class="rv">Preventivo incluido</span></div>
+          <div class="row"><span class="rk">Soporte</span><span class="rv">Técnico durante la renta</span></div>
+        </div>
+        <a class="btn-solid" href="https://wa.me/522223200109" target="_blank">Cotizar planta de luz →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<a class="fab glass" href="https://wa.me/522223200109" target="_blank" aria-label="WhatsApp">
+  <span class="ping"></span>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5 4.5.7.3 1.3.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+</a>
+
+</body>
+</html>

@@ -39,8 +39,8 @@
 
     <sc-if value="{{ isInicio }}" hint-placeholder-val="{{ true }}">
       <section style="position:relative;width:100%;height:84vh;min-height:660px;background:#0A0C09">
-        <image-slot id="hero-main" shape="rect" placeholder="Foto: planta de luz trabajando en obra" style="width:100%;height:100%"></image-slot>
-        <div style="position:absolute;inset:0;background:rgba(10,12,9,0.94);pointer-events:none"></div>
+        <image-slot id="hero-main" shape="rect" src="assets/photos/hero.jpg" placeholder="Foto: planta de luz trabajando en obra" style="width:100%;height:100%"></image-slot>
+        <div style="position:absolute;inset:0;background:linear-gradient(90deg, rgba(10,12,9,0.88) 0%, rgba(10,12,9,0.52) 52%, rgba(10,12,9,0.22) 100%), linear-gradient(0deg, rgba(10,12,9,0.92) 0%, rgba(10,12,9,0.28) 55%, rgba(10,12,9,0) 100%);pointer-events:none"></div>
         <div style="position:absolute;left:0;bottom:0;right:0;padding:0 40px 56px">
           <div style="max-width:1280px;margin:0 auto">
             <p style="color:#A8C98A;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:24px">Desde 1999 — Puebla y región centro de México</p>
@@ -77,7 +77,7 @@
           <div style="display:flex;flex-direction:column">
             <sc-for list="{{ soluciones }}" as="sol" hint-placeholder-count="5">
               <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:48px;align-items:center;padding:44px 0;border-top:1px solid rgba(237,237,230,0.1)">
-                <image-slot id="{{ sol.imgId }}" shape="rect" placeholder="{{ sol.placeholder }}" style="width:100%;height:210px"></image-slot>
+                <image-slot id="{{ sol.imgId }}" shape="rect" src="{{ sol.src }}" placeholder="{{ sol.placeholder }}" style="width:100%;height:210px"></image-slot>
                 <div>
                   <h3 style="font-size:19px;font-weight:400;margin-bottom:12px;font-family:'Work Sans',sans-serif;color:#F4F4EE">{{ sol.title }}</h3>
                   <p style="color:#8D8F85;font-size:14.5px;line-height:1.85;margin-bottom:16px;max-width:420px">{{ sol.desc }}</p>
@@ -105,7 +105,7 @@
 
       <section style="border-bottom:1px solid rgba(237,237,230,0.09)">
         <div style="max-width:1280px;margin:0 auto;padding:110px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:72px;align-items:center">
-          <image-slot id="planta-destacada" shape="rect" placeholder="Foto: planta de luz de gran capacidad en sitio" style="width:100%;height:420px"></image-slot>
+          <image-slot id="planta-destacada" shape="rect" src="assets/photos/planta-destacada.jpg" placeholder="Foto: planta de luz de gran capacidad en sitio" style="width:100%;height:420px"></image-slot>
           <div>
             <p style="color:#A8C98A;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:20px">Plantas de luz</p>
             <h2 class="serif" style="font-size:32px;margin-bottom:20px;color:#F4F4EE">La energía no puede detener tu operación</h2>
@@ -131,7 +131,7 @@
             </div>
             <a href="{{ waLinkPoliza }}" target="_blank" style="color:#A8C98A;font-size:14px;border-bottom:1px solid rgba(168,201,138,0.5)">Conocer pólizas de mantenimiento</a>
           </div>
-          <image-slot id="poliza-mantenimiento" shape="rect" placeholder="Foto: técnico revisando generador" style="width:100%;height:360px"></image-slot>
+          <image-slot id="poliza-mantenimiento" shape="rect" src="assets/photos/mantenimiento.jpg" placeholder="Foto: técnico revisando generador" style="width:100%;height:360px"></image-slot>
         </div>
       </section>
 
@@ -143,7 +143,7 @@
             <p style="color:#8D8F85;font-size:15px;line-height:1.9;margin-bottom:26px">Nacimos en 1999 como un negocio familiar en Puebla. La experiencia acumulada en campo se refleja hoy en conocimiento técnico, servicio y relaciones de largo plazo con nuestros clientes.</p>
             <button onClick="{{ goNosotros }}" style="background:none;border:none;color:#EDEDE6;font-size:14px;padding:0;cursor:pointer;border-bottom:1px solid rgba(237,237,230,0.35);font-family:'Work Sans',sans-serif;font-weight:300">Conoce nuestra historia</button>
           </div>
-          <image-slot id="historia-familia" shape="rect" placeholder="Foto: equipo Rivas / bodega histórica" style="width:100%;height:360px"></image-slot>
+          <image-slot id="historia-familia" shape="rect" src="assets/photos/historia.jpg" placeholder="Foto: equipo Rivas / bodega histórica" style="width:100%;height:360px"></image-slot>
         </div>
       </section>
 
@@ -191,7 +191,7 @@
       </section>
 
       <section style="max-width:1280px;margin:0 auto;padding:110px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:72px;align-items:center;border-bottom:1px solid rgba(237,237,230,0.09)">
-        <image-slot id="eq-plantas-full" shape="rect" placeholder="Foto: planta de luz en operación" style="width:100%;height:420px"></image-slot>
+        <image-slot id="eq-plantas-full" shape="rect" src="assets/photos/eq-plantas.jpg" placeholder="Foto: planta de luz en operación" style="width:100%;height:420px"></image-slot>
         <div>
           <p style="color:#A8C98A;font-size:11px;text-transform:uppercase;letter-spacing:0.16em;margin-bottom:20px">Nuestra especialidad</p>
           <h2 class="serif" style="font-size:32px;margin-bottom:22px;color:#F4F4EE">Plantas de luz</h2>
@@ -210,7 +210,7 @@
         <div style="display:flex;flex-direction:column">
           <sc-for list="{{ equiposComplementarios }}" as="eq" hint-placeholder-count="3">
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:48px;align-items:center;padding:52px 0;border-top:1px solid rgba(237,237,230,0.1)">
-              <image-slot id="{{ eq.imgId }}" shape="rect" placeholder="{{ eq.placeholder }}" style="width:100%;height:230px"></image-slot>
+              <image-slot id="{{ eq.imgId }}" shape="rect" src="{{ eq.src }}" placeholder="{{ eq.placeholder }}" style="width:100%;height:230px"></image-slot>
               <div>
                 <h3 style="font-size:19px;font-weight:400;margin-bottom:14px;font-family:'Work Sans',sans-serif;color:#F4F4EE">{{ eq.title }}</h3>
                 <p style="color:#8D8F85;font-size:14.5px;line-height:1.85;margin-bottom:20px;max-width:420px">{{ eq.desc }}</p>
@@ -237,7 +237,7 @@
           <h1 class="serif" style="font-size:40px;margin-bottom:26px;color:#F4F4EE">Una empresa familiar desde 1999</h1>
           <p style="color:#8D8F85;font-size:15.5px;line-height:1.95">Nuestra misión es brindar soluciones integrales en la renta, venta y reparación de plantas de luz, maquinaria para la construcción y refacciones, ofreciendo equipos confiables, servicio técnico especializado y una atención cercana que refleja nuestros valores familiares. Como empresa fundada en 1999, trabajamos con compromiso, experiencia y calidad para garantizar continuidad operativa, seguridad y productividad en cada proyecto de nuestros clientes.</p>
         </div>
-        <image-slot id="nosotros-hero" shape="rect" placeholder="Foto: equipo Rivas / bodega" style="width:100%;height:400px"></image-slot>
+        <image-slot id="nosotros-hero" shape="rect" src="assets/photos/nosotros.jpg" placeholder="Foto: equipo Rivas / bodega" style="width:100%;height:400px"></image-slot>
       </section>
 
       <section style="max-width:1280px;margin:0 auto;padding:110px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0;border-bottom:1px solid rgba(237,237,230,0.09)">
@@ -367,11 +367,11 @@ class Component extends DCLogic {
       trustIndicators: ['Desde 1999', 'Servicio técnico especializado', 'Renta · Venta · Reparación', 'Puebla y región centro'],
       brandsDoubled: brands.concat(brands),
       soluciones: [
-        { imgId: 'sol-plantas', title: 'Plantas de luz', desc: 'Renta, venta y servicio técnico de generadores para obra, industria y respaldo.', placeholder: 'Foto: planta de luz' },
-        { imgId: 'sol-maquinaria', title: 'Maquinaria ligera', desc: 'Compactación, corte, demolición y perforación para necesidades de obra.', placeholder: 'Foto: maquinaria ligera' },
-        { imgId: 'sol-torres', title: 'Torres de iluminación', desc: 'Iluminación temporal para obra nocturna, industria y eventos.', placeholder: 'Foto: torre de iluminación' },
-        { imgId: 'sol-compresores', title: 'Compresores de aire', desc: 'Soluciones neumáticas para aplicaciones industriales y de construcción.', placeholder: 'Foto: compresor de aire' },
-        { imgId: 'sol-soldadoras', title: 'Soldadoras y herramientas', desc: 'Equipos profesionales para trabajo industrial y de construcción.', placeholder: 'Foto: soldadora' }
+        { imgId: 'sol-plantas', title: 'Plantas de luz', desc: 'Renta, venta y servicio técnico de generadores para obra, industria y respaldo.', placeholder: 'Foto: planta de luz', src: 'assets/photos/plantas.jpg' },
+        { imgId: 'sol-maquinaria', title: 'Maquinaria ligera', desc: 'Compactación, corte, demolición y perforación para necesidades de obra.', placeholder: 'Foto: maquinaria ligera', src: '' },
+        { imgId: 'sol-torres', title: 'Torres de iluminación', desc: 'Iluminación temporal para obra nocturna, industria y eventos.', placeholder: 'Foto: torre de iluminación', src: 'assets/photos/torres.jpg' },
+        { imgId: 'sol-compresores', title: 'Compresores de aire', desc: 'Soluciones neumáticas para aplicaciones industriales y de construcción.', placeholder: 'Foto: compresor de aire', src: 'assets/photos/compresores.jpg' },
+        { imgId: 'sol-soldadoras', title: 'Soldadoras y herramientas', desc: 'Equipos profesionales para trabajo industrial y de construcción.', placeholder: 'Foto: soldadora', src: 'assets/photos/soldadoras.jpg' }
       ],
       pilares: [
         { title: 'Más de 25 años de experiencia', desc: 'Desde 1999 resolviendo necesidades de energía y maquinaria en la región.' },
@@ -387,9 +387,9 @@ class Component extends DCLogic {
       ],
       plantasFeatures: ['Entrega e instalación en sitio', 'Combustible diésel de bajo consumo', 'Mantenimiento preventivo incluido', 'Soporte técnico durante la renta'],
       equiposComplementarios: [
-        { imgId: 'eq-bailarinas', title: 'Bailarinas industriales', desc: 'Compactadoras vibratorias para zanjas y compactación de suelos en obra civil.', placeholder: 'Foto: bailarina compactadora' },
-        { imgId: 'eq-compresores', title: 'Compresores de aire', desc: 'Suministro de aire a presión para herramienta neumática e instalaciones industriales.', placeholder: 'Foto: compresor de aire' },
-        { imgId: 'eq-torres', title: 'Torres de iluminación', desc: 'Iluminación de gran alcance para obra nocturna, eventos y seguridad perimetral.', placeholder: 'Foto: torre de iluminación' }
+        { imgId: 'eq-bailarinas', title: 'Bailarinas industriales', desc: 'Compactadoras vibratorias para zanjas y compactación de suelos en obra civil.', placeholder: 'Foto: bailarina compactadora', src: '' },
+        { imgId: 'eq-compresores', title: 'Compresores de aire', desc: 'Suministro de aire a presión para herramienta neumática e instalaciones industriales.', placeholder: 'Foto: compresor de aire', src: 'assets/photos/eq-compresores.jpg' },
+        { imgId: 'eq-torres', title: 'Torres de iluminación', desc: 'Iluminación de gran alcance para obra nocturna, eventos y seguridad perimetral.', placeholder: 'Foto: torre de iluminación', src: 'assets/photos/torres.jpg' }
       ],
       year: new Date().getFullYear()
     };

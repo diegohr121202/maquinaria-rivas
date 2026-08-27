@@ -1,0 +1,216 @@
+---
+import Base from '../layouts/Base.astro';
+import BrandMarquee from '../components/BrandMarquee.astro';
+import { equipos } from '../data/equipos';
+import { pilares, sectores } from '../data/contenido';
+import { wa, site } from '../data/site';
+
+const teasers = equipos.filter((e) => e.slug !== 'mantenimiento').slice(0, 4);
+
+const icons: Record<string, string> = {
+  clock: '<path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16zm.5-13H11v6l5.2 3.1.8-1.3-4.5-2.7V7z"/>',
+  shield: '<path d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3zm-1.1 13.5L7 11.6l1.4-1.4 2.5 2.5 4.7-4.7L17 9.4l-6.1 6.1z"/>',
+  wrench: '<path d="M22 6.9a5.5 5.5 0 01-7.1 5.3l-8 8a2 2 0 01-2.8-2.8l8-8A5.5 5.5 0 0116.6 2l-2.8 2.8 1.6 3.2 3.2 1.6L21.4 6c.4.3.6.6.6.9z"/>',
+  handshake: '<path d="M12 4 9.5 6.5 12 9l2.5-2.5L12 4zm-6 3L3 10l5 5 1.5-1.5L6 10l1.5-1.5L6 7zm12 0-1.5 1.5L18 10l-3.5 3.5L16 15l5-5-3-3zM8.5 14 7 15.5 12 20l5-4.5L15.5 14 12 17l-3.5-3z"/>',
+};
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: 'Renta de plantas de luz y maquinaria para construcción',
+  provider: { '@type': 'LocalBusiness', name: site.legalName },
+  areaServed: site.coverage,
+  description: 'Renta, venta y servicio técnico de generadores diésel 45–700 kVA, compresores, torres de iluminación, soldadoras y maquinaria ligera.',
+};
+---
+<Base
+  title="Renta de Maquinaria Rivas | Plantas de luz y maquinaria en Puebla"
+  description="Renta de plantas de luz (45–700 kVA) y maquinaria para construcción en Puebla y región centro. Servicio técnico, refacciones y entrega en sitio. Desde 1999."
+  preloadImage="/assets/photos/hero.jpg"
+  schema={serviceSchema}
+>
+  <!-- Hero -->
+  <section class="hero" id="inicio">
+    <div class="hero-bg" style="background-image:url('/assets/photos/hero.jpg')"></div>
+    <div class="hero-scrim"></div>
+    <div class="wrap"><div class="hero-content">
+      <span class="over">Desde {site.foundedYear} · {site.coverage}</span>
+      <h1>Renta de <span class="g">plantas de luz</span> y maquinaria para construcción en Puebla</h1>
+      <p class="support">Renta, servicio técnico y refacciones. Equipos listos para obra, industria, gobierno y eventos, con entrega e instalación en sitio.</p>
+      <div class="hero-actions">
+        <a class="btn filled state" href={wa()} target="_blank" rel="noopener">Solicitar cotización</a>
+        <a class="btn text state" href="/equipos/">Ver equipos →</a>
+      </div>
+      <div class="quickstats">
+        <div class="stat"><div class="n">+25 años</div><div class="t">De experiencia</div></div>
+        <div class="stat"><div class="n">45–700 kVA</div><div class="t">Plantas de luz</div></div>
+        <div class="stat"><div class="n">En sitio</div><div class="t">Entrega e instalación</div></div>
+      </div>
+    </div></div>
+  </section>
+
+  <BrandMarquee />
+
+  <!-- Soluciones -->
+  <section class="sec" id="equipos">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <span class="over">Catálogo</span>
+          <h2>Lo que puedes rentar con nosotros</h2>
+        </div>
+        <a class="btn outlined state" href="/equipos/">Ver todo el catálogo →</a>
+      </div>
+      <div class="cards">
+        {teasers.map((e) => (
+          <div class="card reveal">
+            <a class="media" href={e.landing} aria-label={`Ver ${e.title}`}><img src={`/assets/photos/${e.photo}`} alt={e.alt} loading="lazy" /></a>
+            <div class="body"><h3><a href={e.landing}>{e.title}</a></h3><p>{e.desc}</p></div>
+            <div class="actions" style="display:flex;gap:4px;flex-wrap:wrap">
+              <a class="btn text state" href={e.landing}>Ver más →</a>
+              <a class="btn text state" href={wa(e.wa)} target="_blank" rel="noopener" style="color:var(--on-med)">Cotizar</a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ¿Por qué Rivas? -->
+  <section class="sec alt">
+    <div class="wrap">
+      <div class="sec-head reveal"><div>
+        <span class="over">¿Por qué Rivas?</span>
+        <h2>Más de dos décadas resolviendo energía y maquinaria en Puebla</h2>
+        <p class="lead">Desde 1999 rentamos, vendemos y damos servicio técnico a plantas de luz y maquinaria para obra, industria, gobierno y eventos en la región centro del país.</p>
+      </div></div>
+      <div class="pillars">
+        {pilares.map((p) => (
+          <div class="pillar reveal">
+            <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true" set:html={icons[p.icon]}></svg></div>
+            <h3>{p.title}</h3>
+            <p>{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Planta destacada -->
+  <section class="feature">
+    <div class="wrap"><div class="grid">
+      <div class="media-card reveal">
+        <img src="/assets/photos/planta-destacada.jpg" alt="Planta de luz industrial diésel en operación" loading="lazy" />
+        <span class="tag">Diésel · En operación</span>
+      </div>
+      <div class="reveal">
+        <span class="over">Plantas de luz</span>
+        <h2>La energía no puede detener tu operación</h2>
+        <p class="desc">Generadores para obra, industria, respaldo, eventos y emergencias, con entrega e instalación en sitio y soporte técnico durante toda la renta.</p>
+        <div class="speclist">
+          <div class="r"><span class="rk">Rango de capacidad</span><span class="rv hi">45–700 kVA</span></div>
+          <div class="r"><span class="rk">Combustible</span><span class="rv">Diésel bajo consumo</span></div>
+          <div class="r"><span class="rk">Instalación</span><span class="rv">En sitio</span></div>
+          <div class="r"><span class="rk">Mantenimiento</span><span class="rv">Preventivo incluido</span></div>
+        </div>
+        <a class="btn filled state" href={wa('Hola, me interesa cotizar una planta de luz.')} target="_blank" rel="noopener">Cotizar planta de luz</a>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- Sectores -->
+  <section class="sec alt">
+    <div class="wrap">
+      <div class="sec-head reveal"><div>
+        <span class="over">Sectores</span>
+        <h2>Plantas de luz y maquinaria para cada proyecto</h2>
+        <p class="lead">Atendemos industria, eventos, gobierno y construcción con equipos entregados e instalados en sitio.</p>
+      </div></div>
+      <div class="sectors">
+        {sectores.map((s) => (
+          <div class="sector reveal">
+            <img src={`/assets/photos/${s.photo}`} alt={s.alt} loading="lazy" />
+            <div class="ov"></div>
+            <div class="txt"><h3>{s.title}</h3><p>{s.desc}</p></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Números / confianza -->
+  <section class="sec" aria-label="Maquinaria Rivas en cifras">
+    <div class="wrap">
+      <div class="numbers reveal">
+        <div><div class="n">+25</div><div class="t">Años de experiencia</div></div>
+        <div><div class="n">45–700 kVA</div><div class="t">Rango de plantas de luz</div></div>
+        <div><div class="n">20+</div><div class="t">Marcas que manejamos</div></div>
+        <div><div class="n">En sitio</div><div class="t">Entrega e instalación</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pólizas de mantenimiento -->
+  <section class="feature rev alt">
+    <div class="wrap"><div class="grid">
+      <div class="media-card reveal">
+        <img src="/assets/photos/g-mantenimiento.jpg" alt="Técnico dando mantenimiento a una planta de luz" loading="lazy" />
+        <span class="tag">Servicio técnico especializado</span>
+      </div>
+      <div class="reveal">
+        <span class="over">Pólizas de mantenimiento</span>
+        <h2>Tu planta lista antes de que la necesites</h2>
+        <p class="desc">Mantenimiento preventivo programado para generadores y transferencias, con revisión y servicio técnico especializado.</p>
+        <ul class="benefits">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Mantenimiento preventivo programado</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Revisión de generador y transferencia</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Detección anticipada de fallas</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Mayor confiabilidad y vida útil del equipo</li>
+        </ul>
+        <a class="btn outlined state" href="/servicios/">Conocer pólizas →</a>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- Nosotros teaser -->
+  <section class="band">
+    <div class="wrap"><div class="grid">
+      <div class="reveal">
+        <span class="over">Nosotros</span>
+        <h2>Una empresa familiar desde 1999</h2>
+        <p>Nacimos en Puebla como un negocio familiar. Más de 25 años de experiencia en campo se reflejan hoy en conocimiento técnico, servicio cercano y relaciones de largo plazo con nuestros clientes.</p>
+        <div class="hero-actions" style="margin-top:6px"><a class="btn tonal state" href="/nosotros/">Conoce nuestra historia →</a></div>
+      </div>
+      <div class="media-card reveal">
+        <img src="/assets/photos/historia.jpg" alt="Equipo técnico de Rivas" loading="lazy" />
+        <span class="tag">Equipo Rivas · Puebla</span>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- Galería -->
+  <section class="sec" id="proyectos">
+    <div class="wrap">
+      <div class="sec-head reveal"><div><span class="over">En acción</span><h2>Nuestros equipos en obra, industria y eventos</h2></div></div>
+      <div class="gallery">
+        <div class="gtile big"><img src="/assets/photos/hero.jpg" alt="Planta de luz Rivas en el Zócalo de Puebla" loading="lazy" /><span class="gt">Puebla · Zócalo</span></div>
+        <div class="gtile"><img src="/assets/photos/g-evento-verde.jpg" alt="Generador en evento" loading="lazy" /><span class="gt">Eventos</span></div>
+        <div class="gtile"><img src="/assets/photos/g-flotilla.jpg" alt="Flotilla de generadores" loading="lazy" /><span class="gt">Flotilla</span></div>
+        <div class="gtile"><img src="/assets/photos/g-maniobra.jpg" alt="Maniobra de instalación" loading="lazy" /><span class="gt">Maniobra</span></div>
+        <div class="gtile"><img src="/assets/photos/g-evento-noche.jpg" alt="Generador en evento nocturno" loading="lazy" /><span class="gt">Eventos</span></div>
+        <div class="gtile"><img src="/assets/photos/plantas.jpg" alt="Generador en industria" loading="lazy" /><span class="gt">Industria</span></div>
+        <div class="gtile"><img src="/assets/photos/g-entrega.jpg" alt="Entrega de equipo en sitio" loading="lazy" /><span class="gt">Entrega en sitio</span></div>
+        <div class="gtile"><img src="/assets/photos/g-transporte.jpg" alt="Transporte de generadores" loading="lazy" /><span class="gt">Transporte</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <section class="ctaband">
+    <div class="wrap"><div class="inner reveal">
+      <h2>Cuéntanos qué necesitas y te ayudamos a encontrar el equipo adecuado</h2>
+      <p>Plantas de luz, maquinaria, mantenimiento o refacciones. Nuestro equipo puede ayudarte a identificar la solución adecuada para tu proyecto.</p>
+      <a class="btn filled state" href={wa()} target="_blank" rel="noopener">Solicitar cotización</a>
+    </div></div>
+  </section>
+</Base>

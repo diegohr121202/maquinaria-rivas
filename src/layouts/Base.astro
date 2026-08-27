@@ -1,0 +1,125 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFab from '../components/WhatsAppFab.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  imageAlt?: string;
+  fabText?: string;
+  preloadImage?: string; // imagen LCP a precargar (ej. hero de la home)
+  schema?: object | object[]; // JSON-LD adicional (Service, BreadcrumbList…)
+}
+
+const {
+  title,
+  description,
+  image = '/assets/photos/hero.jpg',
+  imageAlt = 'Planta de luz Rivas en operación en Puebla',
+  fabText,
+  preloadImage,
+  schema,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(image, Astro.site).href;
+const homeUrl = Astro.site?.href;
+
+const localBusiness = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': `${homeUrl}#business`,
+  name: site.legalName,
+  alternateName: site.name,
+  description: site.schemaDescription,
+  url: homeUrl,
+  logo: new URL('/assets/emblem.png', Astro.site).href,
+  image: ogImage,
+  telephone: site.phoneE164,
+  ...(site.social.length ? { sameAs: site.social } : {}),
+  priceRange: '$$',
+  foundingDate: String(site.foundedYear),
+  slogan: 'Renta de plantas de luz y maquinaria para construcción desde 1999.',
+  knowsLanguage: 'es-MX',
+  areaServed: { '@type': 'Place', name: site.coverage },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: site.phoneE164,
+    contactType: 'ventas',
+    areaServed: 'MX',
+    availableLanguage: 'Spanish',
+  },
+  ...(site.email ? { email: site.email } : {}),
+  ...(site.address
+    ? {
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: `${site.addressStreet}, ${site.addressNeighborhood}`,
+          postalCode: site.postalCode,
+          addressLocality: site.locality,
+          addressRegion: site.region,
+          addressCountry: site.country,
+        },
+      }
+    : {}),
+  ...(site.hours ? { openingHours: site.hours } : {}),
+};
+
+const schemas = [localBusiness, ...(Array.isArray(schema) ? schema : schema ? [schema] : [])];
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#3F7F1E" />
+  <link rel="canonical" href={canonical} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:site_name" content="Maquinaria Rivas" />
+  <meta property="og:locale" content="es_MX" />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:alt" content={imageAlt} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+  <link rel="icon" href="/assets/emblem.png" />
+  {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+</head>
+<body>
+  <Header />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+  <WhatsAppFab text={fabText} />
+
+  <script>
+    // Reveal sutil al hacer scroll (respeta prefers-reduced-motion vía CSS).
+    const els = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && els.length) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px' });
+      els.forEach((el) => io.observe(el));
+    } else {
+      els.forEach((el) => el.classList.add('in'));
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const fmt = (d: Date) => d.toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL('/', Astro.site).href },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: new URL('/blog/', Astro.site).href },
+  ],
+};
+---
+<Base
+  title="Blog | Guías de plantas de luz y maquinaria — Maquinaria Rivas"
+  description="Guías prácticas sobre plantas de luz, mantenimiento, renta de maquinaria y energía para obra, industria y eventos. Consejos del equipo de Maquinaria Rivas."
+  schema={breadcrumbSchema}
+>
+  <section class="sec pagehead">
+    <div class="wrap">
+      <Breadcrumbs items={[{ label: 'Inicio', href: '/' }, { label: 'Blog' }]} />
+      <div class="pagehead" style="border-bottom:0;padding-bottom:0">
+        <span class="over">Blog</span>
+        <h1>Guías de energía y maquinaria</h1>
+        <p>Consejos prácticos sobre plantas de luz, mantenimiento y renta de equipo para que tomes mejores decisiones en tu proyecto.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:clamp(28px,4vw,44px)">
+    <div class="wrap">
+      <div class="cards c3">
+        {posts.map((post) => (
+          <a class="card reveal" href={`/blog/${post.id}/`}>
+            <div class="media"><img src={post.data.heroImage} alt={post.data.heroAlt} loading="lazy" /></div>
+            <div class="body">
+              <div class="post-cardmeta"><span class="post-cat">{post.data.category}</span><time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time></div>
+              <h2 class="post-title">{post.data.title}</h2>
+              <p>{post.data.description}</p>
+            </div>
+            <div class="actions"><span class="btn text state" style="pointer-events:none">Leer más →</span></div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

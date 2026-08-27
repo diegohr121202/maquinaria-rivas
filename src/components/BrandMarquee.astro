@@ -1,0 +1,15 @@
+---
+import { marcas } from '../data/marcas';
+// Se duplica la lista para el loop continuo del marquee.
+const loop = [...marcas, ...marcas];
+---
+<section class="marquee" aria-label="Marcas con las que trabajamos">
+  <p class="label">Marcas con las que trabajamos</p>
+  <div class="viewport">
+    <div class="track">
+      {loop.map((m, i) => (
+        <img src={`/assets/logos/${m.file}`} alt={i < marcas.length ? m.alt : ''} aria-hidden={i >= marcas.length ? 'true' : undefined} loading="lazy" height="40" />
+      ))}
+    </div>
+  </div>
+</section>

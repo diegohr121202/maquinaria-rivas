@@ -1,0 +1,107 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { mision, vision, valores, pilares } from '../data/contenido';
+import { wa, site } from '../data/site';
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL('/', Astro.site).href },
+    { '@type': 'ListItem', position: 2, name: 'Nosotros', item: new URL('/nosotros/', Astro.site).href },
+  ],
+};
+---
+<Base
+  title="Nosotros | Empresa familiar de maquinaria desde 1999 — Rivas"
+  description="Maquinaria Rivas es una empresa familiar fundada en 1999 en Puebla. Más de 25 años de experiencia en renta, venta y servicio técnico de plantas de luz y maquinaria."
+  schema={breadcrumbSchema}
+>
+  <section class="sec pagehead">
+    <div class="wrap">
+      <Breadcrumbs items={[{ label: 'Inicio', href: '/' }, { label: 'Nosotros' }]} />
+      <div class="pagehead" style="border-bottom:0;padding-bottom:0">
+        <span class="over">Nosotros</span>
+        <h1>Una empresa familiar desde 1999</h1>
+        <p>Nacimos en {site.foundedYear} como un negocio familiar en Puebla. La experiencia acumulada en campo se refleja hoy en conocimiento técnico, servicio y relaciones de largo plazo con nuestros clientes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Historia -->
+  <section class="feature" style="padding-top:clamp(30px,4vw,52px)">
+    <div class="wrap"><div class="grid">
+      <div class="media-card reveal">
+        <img src="/assets/photos/nosotros.jpg" alt="Equipo de Maquinaria Rivas en Puebla" loading="lazy" />
+        <span class="tag">Equipo Rivas · Puebla</span>
+      </div>
+      <div class="reveal">
+        <span class="over">Nuestra historia</span>
+        <h2>Más de 25 años haciendo que los proyectos sigan avanzando</h2>
+        <p class="desc">Desde 1999 resolvemos necesidades de energía y maquinaria en la región centro del país. Lo que empezó como un negocio familiar es hoy un equipo con conocimiento técnico y una forma de trabajar cercana, directa y confiable.</p>
+        <a class="btn filled state" href={wa()} target="_blank" rel="noopener">Trabaja con nosotros</a>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- Misión / Visión -->
+  <section class="sec alt" aria-labelledby="mv-title">
+    <div class="wrap">
+      <div class="sec-head reveal"><div>
+        <span class="over">Quiénes somos</span>
+        <h2 id="mv-title">Misión y visión</h2>
+      </div></div>
+      <div class="mv">
+        <div class="block reveal">
+          <h3>Misión</h3>
+          <p>{mision}</p>
+        </div>
+        <div class="block reveal">
+          <h3>Visión</h3>
+          <p>{vision}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Valores -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head reveal" style="justify-content:center;text-align:center"><div>
+        <span class="over">Lo que nos define</span>
+        <h2>Nuestros valores</h2>
+      </div></div>
+      <div class="values reveal">
+        {valores.map((v) => <span>{v}</span>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ¿Por qué Rivas? -->
+  <section class="sec alt">
+    <div class="wrap">
+      <div class="sec-head reveal"><div>
+        <span class="over">¿Por qué Rivas?</span>
+        <h2>Lo que nos distingue en campo</h2>
+      </div></div>
+      <div class="pillars">
+        {pilares.map((p) => (
+          <div class="pillar reveal">
+            <h3>{p.title}</h3>
+            <p>{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="ctaband">
+    <div class="wrap"><div class="inner reveal">
+      <h2>Cuéntanos qué necesitas para tu proyecto</h2>
+      <p>Nuestro equipo puede ayudarte a identificar la planta de luz o la maquinaria adecuada para tu obra, industria o evento.</p>
+      <a class="btn filled state" href={wa()} target="_blank" rel="noopener">Solicitar cotización</a>
+    </div></div>
+  </section>
+</Base>

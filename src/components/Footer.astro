@@ -1,0 +1,45 @@
+---
+import { site, wa, mapsLink } from '../data/site';
+const year = 2026;
+---
+<footer class="ft" id="contacto-footer">
+  <div class="wrap">
+    <div class="cols">
+      <!-- Col 1: Marca -->
+      <div class="ft-brandcol">
+        <div class="em"><img src="/assets/emblem.png" alt="Maquinaria Rivas" width="40" height="40"><b>Maquinaria Rivas</b></div>
+        <p class="ft-desc">Empresa familiar desde {site.foundedYear}. Renta, venta y servicio técnico de plantas de luz y maquinaria en {site.coverage}.</p>
+      </div>
+
+      <!-- Col 2 (centro): Contacto -->
+      <div class="ft-contactcol">
+        <h4>Contacto</h4>
+        <div class="ft-contact">
+          <a href={wa()} target="_blank" rel="noopener">WhatsApp · {site.phone}</a>
+          <a href={`tel:${site.phoneE164}`}>Tel. {site.phone}</a>
+          {site.email && <a href={`mailto:${site.email}`}>{site.email}</a>}
+          <a href={mapsLink()} target="_blank" rel="noopener">{site.addressStreet}, {site.addressNeighborhood}, {site.postalCode} {site.locality}</a>
+        </div>
+      </div>
+
+      <!-- Col 3: Mapa -->
+      <div class="ft-mapcol">
+        <h4>Ubicación</h4>
+        <div class="ft-map-mini">
+          <iframe
+            title="Ubicación de Maquinaria Rivas en Google Maps"
+            src={`https://www.google.com/maps?q=${encodeURIComponent(site.mapsQuery)}&output=embed`}
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+        <a class="ft-maplink" href={mapsLink()} target="_blank" rel="noopener">Cómo llegar →</a>
+      </div>
+    </div>
+
+    <div class="legal">
+      <span>© {year} {site.legalName}</span>
+      <span>Hecho en Puebla</span>
+    </div>
+  </div>
+</footer>

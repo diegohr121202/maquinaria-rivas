@@ -1,0 +1,39 @@
+---
+import { nav, wa } from '../data/site';
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href);
+---
+<header class="appbar-wrap">
+  <div class="wrap appbar">
+    <a class="brand" href="/" aria-label="Maquinaria Rivas — Inicio">
+      <img src="/assets/emblem.png" alt="Maquinaria Rivas" width="42" height="42">
+      <b>Maquinaria Rivas</b>
+    </a>
+    <nav class="top" aria-label="Navegación principal">
+      {nav.map((n) => (
+        <a class={isActive(n.href) ? 'active' : ''} href={n.href} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a>
+      ))}
+    </nav>
+    <button class="menu state" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileNav">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </button>
+    <a class="btn filled state" href={wa()} target="_blank" rel="noopener">Solicitar cotización</a>
+  </div>
+  <nav class="mobile-nav wrap" id="mobileNav" aria-label="Navegación móvil">
+    {nav.map((n) => (
+      <a class={isActive(n.href) ? 'active' : ''} href={n.href} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a>
+    ))}
+    <a class="btn filled state" href={wa()} target="_blank" rel="noopener">Solicitar cotización</a>
+  </nav>
+</header>
+
+<script>
+  const btn = document.getElementById('menuBtn');
+  const nav = document.getElementById('mobileNav');
+  btn?.addEventListener('click', () => {
+    const open = nav?.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(!!open));
+    btn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+  });
+</script>

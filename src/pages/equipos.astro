@@ -1,0 +1,111 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { equipos, categorias } from '../data/equipos';
+import { wa, site } from '../data/site';
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL('/', Astro.site).href },
+    { '@type': 'ListItem', position: 2, name: 'Equipos', item: new URL('/equipos/', Astro.site).href },
+  ],
+};
+---
+<Base
+  title="Equipos en renta | Plantas de luz, compresores y maquinaria — Rivas"
+  description="Catálogo de equipos en renta: plantas de luz 45–700 kVA, compresores, torres de iluminación, soldadoras y maquinaria ligera en Puebla y región centro."
+  schema={breadcrumbSchema}
+>
+  <section class="sec pagehead" style="padding-bottom:0;border-bottom:0">
+    <div class="wrap">
+      <Breadcrumbs items={[{ label: 'Inicio', href: '/' }, { label: 'Equipos' }]} />
+      <div class="pagehead" style="border-bottom:0;padding-bottom:0">
+        <span class="over">Catálogo</span>
+        <h1>Nuestros equipos</h1>
+        <p>Renta, venta y servicio técnico de plantas de luz y maquinaria para obra, industria, gobierno y eventos. Entrega e instalación en {site.coverage}.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:clamp(28px,4vw,44px)" aria-labelledby="catalogo-title">
+    <div class="wrap">
+      <div class="sec-head reveal"><div>
+        <span class="over">Catálogo</span>
+        <h2 id="catalogo-title">Plantas de luz, maquinaria y equipo en renta</h2>
+        <p class="lead">Filtra por categoría y cotiza directo por WhatsApp. Todos nuestros equipos incluyen entrega e instalación en sitio.</p>
+      </div></div>
+      <div class="chips" role="tablist" aria-label="Filtrar por categoría">
+        {categorias.map((c, i) => (
+          <button class={`chip${i === 0 ? ' on' : ''}`} data-filter={c.key} aria-pressed={i === 0 ? 'true' : 'false'}>
+            {i === 0 && <span class="ck">●</span>} {c.label}
+          </button>
+        ))}
+      </div>
+      <div class="cards" id="grid">
+        {equipos.map((e) => (
+          <div class="card" data-cat={e.cat}>
+            <a class="media" href={e.landing} aria-label={`Ver ${e.title}`}><img src={`/assets/photos/${e.photo}`} alt={e.alt} loading="lazy" /></a>
+            <div class="body">
+              <span class="over" style="font-size:11px">{e.catLabel}</span>
+              <h3 style="margin-top:6px"><a href={e.landing}>{e.title}</a></h3>
+              <p>{e.desc}</p>
+            </div>
+            <div class="actions" style="display:flex;gap:4px;flex-wrap:wrap">
+              <a class="btn text state" href={e.landing}>Ver detalles →</a>
+              <a class="btn text state" href={wa(e.wa)} target="_blank" rel="noopener" style="color:var(--on-med)">Cotizar</a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature plantas de luz -->
+  <section class="feature alt">
+    <div class="wrap"><div class="grid">
+      <div class="media-card reveal">
+        <img src="/assets/photos/eq-plantas.jpg" alt="Planta de luz de gran capacidad en sitio" loading="lazy" />
+        <span class="tag">Diésel · 45–700 kVA</span>
+      </div>
+      <div class="reveal">
+        <span class="over">Plantas de luz</span>
+        <h2>Generadores listos para trabajar</h2>
+        <p class="desc">Nuestra especialidad. Generadores diésel para obra, industria, respaldo, eventos y emergencias, entregados e instalados en sitio.</p>
+        <div class="speclist">
+          <div class="r"><span class="rk">Entrega e instalación</span><span class="rv hi">En sitio</span></div>
+          <div class="r"><span class="rk">Combustible</span><span class="rv">Diésel de bajo consumo</span></div>
+          <div class="r"><span class="rk">Mantenimiento</span><span class="rv">Preventivo incluido</span></div>
+          <div class="r"><span class="rk">Soporte técnico</span><span class="rv">Durante toda la renta</span></div>
+        </div>
+        <a class="btn filled state" href={wa('Hola, me interesa cotizar una planta de luz.')} target="_blank" rel="noopener">Cotizar plantas de luz</a>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- Banda servicio técnico -->
+  <section class="ctaband">
+    <div class="wrap"><div class="inner reveal">
+      <h2>¿Tu equipo necesita servicio técnico?</h2>
+      <p>Diagnóstico, reparación y mantenimiento de plantas de luz, generadores y transferencias con personal especializado.</p>
+      <a class="btn filled state" href={wa('Hola, necesito servicio técnico para mi equipo.')} target="_blank" rel="noopener">Solicitar servicio técnico</a>
+    </div></div>
+  </section>
+
+  <script>
+    const chips = document.querySelectorAll<HTMLButtonElement>('.chip[data-filter]');
+    const cards = document.querySelectorAll<HTMLElement>('#grid .card');
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        chips.forEach((c) => { c.classList.remove('on'); c.setAttribute('aria-pressed', 'false'); });
+        chip.classList.add('on'); chip.setAttribute('aria-pressed', 'true');
+        const f = chip.dataset.filter;
+        cards.forEach((card) => {
+          const show = f === 'todos' || card.dataset.cat === f;
+          card.hidden = !show;
+        });
+      });
+    });
+  </script>
+</Base>

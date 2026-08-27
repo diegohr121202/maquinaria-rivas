@@ -1,0 +1,109 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { proceso } from '../data/contenido';
+import { wa, site } from '../data/site';
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL('/', Astro.site).href },
+    { '@type': 'ListItem', position: 2, name: 'Servicios', item: new URL('/servicios/', Astro.site).href },
+  ],
+};
+---
+<Base
+  title="Servicios y pólizas de mantenimiento | Maquinaria Rivas"
+  description="Pólizas de mantenimiento preventivo, servicio técnico especializado y refacciones para plantas de luz, generadores y transferencias en Puebla y región centro."
+  fabText="Hola, me interesa conocer las pólizas de mantenimiento."
+  schema={breadcrumbSchema}
+>
+  <section class="sec pagehead">
+    <div class="wrap">
+      <Breadcrumbs items={[{ label: 'Inicio', href: '/' }, { label: 'Servicios' }]} />
+      <div class="pagehead" style="border-bottom:0;padding-bottom:0">
+        <span class="over">Servicios</span>
+        <h1>Servicio técnico y pólizas de mantenimiento</h1>
+        <p>Mantenemos tu equipo confiable y operando. Servicio especializado, mantenimiento preventivo y refacciones para plantas de luz y maquinaria.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pólizas de mantenimiento -->
+  <section class="feature" style="padding-top:clamp(30px,4vw,52px)">
+    <div class="wrap"><div class="grid">
+      <div class="media-card reveal">
+        <img src="/assets/photos/mantenimiento.jpg" alt="Técnico revisando un generador durante mantenimiento" loading="lazy" />
+        <span class="tag">Mantenimiento preventivo</span>
+      </div>
+      <div class="reveal">
+        <span class="over">Pólizas de mantenimiento</span>
+        <h2>Tu planta lista antes de que la necesites</h2>
+        <p class="desc">Pólizas de mantenimiento para generadores de luz y transferencias, con revisión programada y servicio técnico especializado.</p>
+        <ul class="benefits">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Mantenimiento preventivo programado</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Revisión de generador y transferencia</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Detección anticipada de fallas</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Mayor confiabilidad y vida útil del equipo</li>
+        </ul>
+        <a class="btn filled state" href={wa('Hola, me interesa conocer las pólizas de mantenimiento.')} target="_blank" rel="noopener">Conocer pólizas</a>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- Servicio técnico + Refacciones -->
+  <section class="sec alt">
+    <div class="wrap">
+      <div class="sec-head reveal"><div>
+        <span class="over">Más servicios</span>
+        <h2>Todo para mantener tu equipo operando</h2>
+      </div></div>
+      <div class="cards c3">
+        <div class="card reveal"><div class="body" style="padding:24px">
+          <h3>Servicio técnico</h3>
+          <p>Diagnóstico y reparación de plantas de luz, generadores y transferencias con personal con experiencia en campo.</p>
+          <a class="btn text state" href={wa('Hola, necesito servicio técnico para mi equipo.')} target="_blank" rel="noopener">Solicitar servicio →</a>
+        </div></div>
+        <div class="card reveal"><div class="body" style="padding:24px">
+          <h3>Refacciones</h3>
+          <p>Suministro de refacciones para generadores y maquinaria, para mantener la continuidad de tu operación.</p>
+          <a class="btn text state" href={wa('Hola, busco refacciones para mi equipo.')} target="_blank" rel="noopener">Consultar refacciones →</a>
+        </div></div>
+        <div class="card reveal"><div class="body" style="padding:24px">
+          <h3>Renta y venta de equipo</h3>
+          <p>Plantas de luz y maquinaria en renta o venta, con asesoría para elegir la capacidad adecuada a tu proyecto.</p>
+          <a class="btn text state" href="/equipos/">Ver equipos →</a>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proceso -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head reveal"><div>
+        <span class="over">Cómo trabajamos</span>
+        <h2>De la solicitud al equipo operando</h2>
+      </div></div>
+      <div class="process">
+        {proceso.map((p) => (
+          <div class="step reveal">
+            <div class="num"></div>
+            <h3>{p.title}</h3>
+            <p>{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="ctaband">
+    <div class="wrap"><div class="inner reveal">
+      <h2>Hablemos de tu equipo</h2>
+      <p>Cuéntanos qué necesitas —mantenimiento, servicio técnico o refacciones— y te ayudamos a mantener tu operación en marcha.</p>
+      <a class="btn filled state" href={wa('Hola, me gustaría solicitar una cotización.')} target="_blank" rel="noopener">Solicitar cotización</a>
+    </div></div>
+  </section>
+</Base>

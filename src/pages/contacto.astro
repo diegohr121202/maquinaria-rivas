@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { faq } from '../data/contenido';
+import { wa, site, mapsLink } from '../data/site';
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+<Base
+  title="Contacto | Cotiza tu planta de luz o maquinaria — Rivas Puebla"
+  description="Contáctanos para rentar plantas de luz y maquinaria en Puebla y región centro. Cotiza por WhatsApp al 222 320 0109. Respondemos en horario de oficina."
+  schema={faqSchema}
+>
+  <section class="sec pagehead">
+    <div class="wrap">
+      <Breadcrumbs items={[{ label: 'Inicio', href: '/' }, { label: 'Contacto' }]} />
+      <div class="pagehead" style="border-bottom:0;padding-bottom:0">
+        <span class="over">Contacto</span>
+        <h1>Hablemos de tu proyecto</h1>
+        <p>Respondemos por WhatsApp en horario de oficina. Cuéntanos el equipo, la capacidad y las fechas, y te ayudamos a cotizar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:clamp(28px,4vw,44px)">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="reveal">
+          <h2 style="font-weight:500;font-size:clamp(22px,3vw,28px);letter-spacing:-0.01em;margin-bottom:18px">Datos de contacto</h2>
+          <div class="datalist">
+            <div class="r"><span class="rk">WhatsApp</span><span class="rv"><a href={wa()} target="_blank" rel="noopener">{site.phone}</a></span></div>
+            <div class="r"><span class="rk">Teléfono</span><span class="rv"><a href={`tel:${site.phoneE164}`}>{site.phone}</a></span></div>
+            <div class="r"><span class="rk">Correo</span><span class="rv">{site.email ? <a href={`mailto:${site.email}`}>{site.email}</a> : <span class="pend">Por confirmar</span>}</span></div>
+            <div class="r"><span class="rk">Dirección</span><span class="rv">{site.address ? <a href={mapsLink()} target="_blank" rel="noopener">{site.address}</a> : <span class="pend">Por confirmar</span>}</span></div>
+            <div class="r"><span class="rk">Horario</span><span class="rv">{site.hours ?? <span class="pend">Por confirmar</span>}</span></div>
+            <div class="r"><span class="rk">Cobertura</span><span class="rv">{site.coverage}</span></div>
+          </div>
+
+          {site.mapsQuery && (
+            <div class="mapembed">
+              <iframe
+                title="Ubicación de Maquinaria Rivas"
+                src={`https://www.google.com/maps?q=${encodeURIComponent(site.mapsQuery)}&output=embed`}
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          )}
+        </div>
+
+        <div class="contact-panel reveal">
+          <h2>Cotiza en minutos</h2>
+          <p>La forma más rápida de cotizar es por WhatsApp. Te respondemos en horario de oficina.</p>
+          <a class="btn filled state" href={wa()} target="_blank" rel="noopener" style="width:100%">Escribir por WhatsApp</a>
+          <a class="btn outlined state" href={`tel:${site.phoneE164}`} style="width:100%;margin-top:12px">Llamar {site.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="sec alt">
+    <div class="wrap">
+      <div class="sec-head reveal" style="justify-content:center;text-align:center"><div>
+        <span class="over">Preguntas frecuentes</span>
+        <h2>Antes de cotizar</h2>
+      </div></div>
+      <div class="faq reveal">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

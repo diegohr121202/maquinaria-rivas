@@ -1,0 +1,119 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection, render } from 'astro:content';
+import { wa, site } from '../../data/site';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog')).filter((p) => !p.data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post, posts } }));
+}
+
+const { post, posts } = Astro.props;
+const { Content } = await render(post);
+const d = post.data;
+
+const fmt = (date: Date) => date.toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const related = posts
+  .filter((p) => p.id !== post.id)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 2);
+
+const pageUrl = new URL(`/blog/${post.id}/`, Astro.site).href;
+const imgUrl = new URL(d.heroImage, Astro.site).href;
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: d.title,
+    description: d.description,
+    image: imgUrl,
+    datePublished: d.pubDate.toISOString(),
+    dateModified: (d.updatedDate ?? d.pubDate).toISOString(),
+    author: { '@type': 'Organization', name: d.author, url: Astro.site?.href },
+    publisher: {
+      '@type': 'Organization',
+      name: site.name,
+      logo: { '@type': 'ImageObject', url: new URL('/assets/emblem.png', Astro.site).href },
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
+    url: pageUrl,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL('/', Astro.site).href },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: new URL('/blog/', Astro.site).href },
+      { '@type': 'ListItem', position: 3, name: d.title, item: pageUrl },
+    ],
+  },
+];
+---
+<Base
+  title={`${d.title} | Blog Maquinaria Rivas`}
+  description={d.description}
+  image={d.heroImage}
+  imageAlt={d.heroAlt}
+  preloadImage={d.heroImage}
+  schema={schema}
+>
+  <article>
+    <header class="sec pagehead" style="padding-bottom:0">
+      <div class="wrap">
+        <Breadcrumbs items={[{ label: 'Inicio', href: '/' }, { label: 'Blog', href: '/blog/' }, { label: d.title }]} />
+        <div class="article-head">
+          <span class="post-cat">{d.category}</span>
+          <h1>{d.title}</h1>
+          <div class="post-meta">
+            <span>{d.author}</span>
+            <span aria-hidden="true">·</span>
+            <time datetime={d.pubDate.toISOString()}>{fmt(d.pubDate)}</time>
+          </div>
+        </div>
+        <div class="article-hero">
+          <img src={d.heroImage} alt={d.heroAlt} width="1200" height="630" />
+        </div>
+      </div>
+    </header>
+
+    <div class="sec" style="padding-top:clamp(28px,4vw,44px)">
+      <div class="wrap">
+        <div class="prose">
+          <Content />
+        </div>
+
+        <div class="article-cta">
+          <div>
+            <h2>¿Tienes un proyecto en puerta?</h2>
+            <p>Te ayudamos a elegir la planta de luz o la maquinaria adecuada. Respondemos por WhatsApp en horario de oficina.</p>
+          </div>
+          <a class="btn filled state" href={wa()} target="_blank" rel="noopener">Solicitar cotización</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  {related.length > 0 && (
+    <section class="sec alt" aria-labelledby="rel-title">
+      <div class="wrap">
+        <div class="sec-head"><div><span class="over">Sigue leyendo</span><h2 id="rel-title">Artículos relacionados</h2></div></div>
+        <div class="cards c3">
+          {related.map((p) => (
+            <a class="card reveal" href={`/blog/${p.id}/`}>
+              <div class="media"><img src={p.data.heroImage} alt={p.data.heroAlt} loading="lazy" /></div>
+              <div class="body">
+                <div class="post-cardmeta"><span class="post-cat">{p.data.category}</span><time datetime={p.data.pubDate.toISOString()}>{fmt(p.data.pubDate)}</time></div>
+                <h3 class="post-title">{p.data.title}</h3>
+                <p>{p.data.description}</p>
+              </div>
+              <div class="actions"><span class="btn text state" style="pointer-events:none">Leer más →</span></div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</Base>

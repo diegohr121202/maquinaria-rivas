@@ -17,26 +17,26 @@ const icons: Record<string, string> = {
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  serviceType: 'Renta de plantas de luz y maquinaria para construcción',
+  serviceType: 'Renta de plantas de luz y maquinaria ligera para construcción',
   provider: { '@type': 'LocalBusiness', name: site.legalName },
   areaServed: site.coverage,
-  description: 'Renta, venta y servicio técnico de generadores diésel 45–700 kVA, compresores, torres de iluminación, soldadoras y maquinaria ligera.',
+  description: 'Renta, venta y servicio técnico de generadores diésel 45–700 kVA, compresores, torres de iluminación, soldadoras y maquinaria ligera para construcción. Nos especializamos en maquinaria ligera; no rentamos maquinaria pesada como excavadoras, retroexcavadoras ni grúas.',
 };
 ---
 <Base
-  title="Renta de Maquinaria Rivas | Plantas de luz y maquinaria en Puebla"
-  description="Renta de plantas de luz (45–700 kVA) y maquinaria para construcción en Puebla y región centro. Servicio técnico, refacciones y entrega en sitio. Desde 1999."
-  preloadImage="/assets/photos/hero.jpg"
+  title="Renta de plantas de luz y maquinaria ligera en Puebla | Maquinaria Rivas"
+  description="Renta de plantas de luz (45–700 kVA) y maquinaria ligera para construcción en Puebla y región centro: compresores, torres de iluminación, soldadoras y compactadoras. Entrega en sitio desde 1999."
+  preloadImage="/assets/photos/hero.webp"
   schema={serviceSchema}
 >
   <!-- Hero -->
   <section class="hero" id="inicio">
-    <div class="hero-bg" style="background-image:url('/assets/photos/hero.jpg')"></div>
+    <div class="hero-bg" style="background-image:url('/assets/photos/hero.webp')"></div>
     <div class="hero-scrim"></div>
     <div class="wrap"><div class="hero-content">
       <span class="over">Desde {site.foundedYear} · {site.coverage}</span>
-      <h1>Renta de <span class="g">plantas de luz</span> y maquinaria para construcción en Puebla</h1>
-      <p class="support">Renta, servicio técnico y refacciones. Equipos listos para obra, industria, gobierno y eventos, con entrega e instalación en sitio.</p>
+      <h1>Renta de <span class="g">plantas de luz</span> y maquinaria ligera para construcción en Puebla</h1>
+      <p class="support">Renta, servicio técnico y refacciones. Equipos ligeros listos para obra, industria, gobierno y eventos, con entrega e instalación en sitio.</p>
       <div class="hero-actions">
         <a class="btn filled state" href={wa()} target="_blank" rel="noopener">Solicitar cotización</a>
         <a class="btn text state" href="/equipos/">Ver equipos →</a>
@@ -81,8 +81,8 @@ const serviceSchema = {
     <div class="wrap">
       <div class="sec-head reveal"><div>
         <span class="over">¿Por qué Rivas?</span>
-        <h2>Más de dos décadas resolviendo energía y maquinaria en Puebla</h2>
-        <p class="lead">Desde 1999 rentamos, vendemos y damos servicio técnico a plantas de luz y maquinaria para obra, industria, gobierno y eventos en la región centro del país.</p>
+        <h2>Más de dos décadas resolviendo energía y maquinaria ligera en Puebla</h2>
+        <p class="lead">Desde 1999 rentamos, vendemos y damos servicio técnico a plantas de luz y maquinaria ligera para obra, industria, gobierno y eventos en la región centro del país.</p>
       </div></div>
       <div class="pillars">
         {pilares.map((p) => (
@@ -100,7 +100,7 @@ const serviceSchema = {
   <section class="feature">
     <div class="wrap"><div class="grid">
       <div class="media-card reveal">
-        <img src="/assets/photos/planta-destacada.jpg" alt="Planta de luz industrial diésel en operación" loading="lazy" />
+        <img src="/assets/photos/planta-destacada.webp" alt="Planta de luz industrial diésel en operación" loading="lazy" />
         <span class="tag">Diésel · En operación</span>
       </div>
       <div class="reveal">
@@ -123,8 +123,8 @@ const serviceSchema = {
     <div class="wrap">
       <div class="sec-head reveal"><div>
         <span class="over">Sectores</span>
-        <h2>Plantas de luz y maquinaria para cada proyecto</h2>
-        <p class="lead">Atendemos industria, eventos, gobierno y construcción con equipos entregados e instalados en sitio.</p>
+        <h2>Plantas de luz y maquinaria ligera para cada proyecto</h2>
+        <p class="lead">Atendemos industria, eventos, gobierno y construcción con equipos ligeros entregados e instalados en sitio.</p>
       </div></div>
       <div class="sectors">
         {sectores.map((s) => (
@@ -154,7 +154,7 @@ const serviceSchema = {
   <section class="feature rev alt">
     <div class="wrap"><div class="grid">
       <div class="media-card reveal">
-        <img src="/assets/photos/g-mantenimiento.jpg" alt="Técnico dando mantenimiento a una planta de luz" loading="lazy" />
+        <img src="/assets/photos/g-mantenimiento.webp" alt="Técnico dando mantenimiento a una planta de luz" loading="lazy" />
         <span class="tag">Servicio técnico especializado</span>
       </div>
       <div class="reveal">
@@ -182,7 +182,7 @@ const serviceSchema = {
         <div class="hero-actions" style="margin-top:6px"><a class="btn tonal state" href="/nosotros/">Conoce nuestra historia →</a></div>
       </div>
       <div class="media-card reveal">
-        <img src="/assets/photos/historia.jpg" alt="Equipo técnico de Rivas" loading="lazy" />
+        <img src="/assets/photos/historia.webp" alt="Equipo técnico de Rivas" loading="lazy" />
         <span class="tag">Equipo Rivas · Puebla</span>
       </div>
     </div></div>
@@ -193,14 +193,14 @@ const serviceSchema = {
     <div class="wrap">
       <div class="sec-head reveal"><div><span class="over">En acción</span><h2>Nuestros equipos en obra, industria y eventos</h2></div></div>
       <div class="gallery">
-        <div class="gtile big"><img src="/assets/photos/hero.jpg" alt="Planta de luz Rivas en el Zócalo de Puebla" loading="lazy" /><span class="gt">Puebla · Zócalo</span></div>
-        <div class="gtile"><img src="/assets/photos/g-evento-verde.jpg" alt="Generador en evento" loading="lazy" /><span class="gt">Eventos</span></div>
-        <div class="gtile"><img src="/assets/photos/g-flotilla.jpg" alt="Flotilla de generadores" loading="lazy" /><span class="gt">Flotilla</span></div>
-        <div class="gtile"><img src="/assets/photos/g-maniobra.jpg" alt="Maniobra de instalación" loading="lazy" /><span class="gt">Maniobra</span></div>
-        <div class="gtile"><img src="/assets/photos/g-evento-noche.jpg" alt="Generador en evento nocturno" loading="lazy" /><span class="gt">Eventos</span></div>
-        <div class="gtile"><img src="/assets/photos/plantas.jpg" alt="Generador en industria" loading="lazy" /><span class="gt">Industria</span></div>
-        <div class="gtile"><img src="/assets/photos/g-entrega.jpg" alt="Entrega de equipo en sitio" loading="lazy" /><span class="gt">Entrega en sitio</span></div>
-        <div class="gtile"><img src="/assets/photos/g-transporte.jpg" alt="Transporte de generadores" loading="lazy" /><span class="gt">Transporte</span></div>
+        <div class="gtile big"><img src="/assets/photos/hero.webp" alt="Planta de luz Rivas en el Zócalo de Puebla" loading="lazy" /><span class="gt">Puebla · Zócalo</span></div>
+        <div class="gtile"><img src="/assets/photos/g-evento-verde.webp" alt="Generador en evento" loading="lazy" /><span class="gt">Eventos</span></div>
+        <div class="gtile"><img src="/assets/photos/g-flotilla.webp" alt="Flotilla de generadores" loading="lazy" /><span class="gt">Flotilla</span></div>
+        <div class="gtile"><img src="/assets/photos/g-maniobra.webp" alt="Maniobra de instalación" loading="lazy" /><span class="gt">Maniobra</span></div>
+        <div class="gtile"><img src="/assets/photos/g-evento-noche.webp" alt="Generador en evento nocturno" loading="lazy" /><span class="gt">Eventos</span></div>
+        <div class="gtile"><img src="/assets/photos/plantas.webp" alt="Generador en industria" loading="lazy" /><span class="gt">Industria</span></div>
+        <div class="gtile"><img src="/assets/photos/g-entrega.webp" alt="Entrega de equipo en sitio" loading="lazy" /><span class="gt">Entrega en sitio</span></div>
+        <div class="gtile"><img src="/assets/photos/g-transporte.webp" alt="Transporte de generadores" loading="lazy" /><span class="gt">Transporte</span></div>
       </div>
     </div>
   </section>
@@ -209,7 +209,7 @@ const serviceSchema = {
   <section class="ctaband">
     <div class="wrap"><div class="inner reveal">
       <h2>Cuéntanos qué necesitas y te ayudamos a encontrar el equipo adecuado</h2>
-      <p>Plantas de luz, maquinaria, mantenimiento o refacciones. Nuestro equipo puede ayudarte a identificar la solución adecuada para tu proyecto.</p>
+      <p>Plantas de luz, maquinaria ligera, mantenimiento o refacciones. Nuestro equipo puede ayudarte a identificar la solución adecuada para tu proyecto.</p>
       <a class="btn filled state" href={wa()} target="_blank" rel="noopener">Solicitar cotización</a>
     </div></div>
   </section>

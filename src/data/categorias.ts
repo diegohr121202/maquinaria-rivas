@@ -36,9 +36,9 @@ export const categorias: Categoria[] = [
       'Renta de plantas de luz diésel de 45 a 700 kVA en Puebla y región centro. Entrega e instalación en sitio, mantenimiento incluido y servicio técnico. Desde 1999.',
     intro:
       'Generadores diésel para obra, industria, respaldo, eventos y emergencias. Entregamos e instalamos en sitio y damos soporte técnico durante toda la renta.',
-    heroPhoto: 'planta-destacada.jpg',
+    heroPhoto: 'planta-destacada.webp',
     heroAlt: 'Planta de luz diésel de gran capacidad en operación en Puebla',
-    featurePhoto: 'eq-plantas.jpg',
+    featurePhoto: 'eq-plantas.webp',
     featureAlt: 'Planta de luz industrial lista para trabajar en obra',
     featureTitle: 'La energía no puede detener tu operación',
     featureDesc:
@@ -70,9 +70,9 @@ export const categorias: Categoria[] = [
       'Renta de torres de iluminación de gran alcance para obra nocturna, eventos e industria en Puebla y región centro. Entrega en sitio y servicio técnico.',
     intro:
       'Iluminación temporal de gran alcance para obra nocturna, eventos, industria y seguridad perimetral, con entrega e instalación en sitio.',
-    heroPhoto: 'torres.jpg',
+    heroPhoto: 'torres.webp',
     heroAlt: 'Torre de iluminación iluminando una obra nocturna',
-    featurePhoto: 'torres.jpg',
+    featurePhoto: 'torres.webp',
     featureAlt: 'Torre de iluminación de gran alcance en operación',
     featureTitle: 'Ilumina donde el proyecto lo necesita',
     featureDesc:
@@ -103,9 +103,9 @@ export const categorias: Categoria[] = [
       'Renta de compresores de aire para herramienta neumática e instalaciones industriales en Puebla y región centro. Entrega en sitio y servicio técnico.',
     intro:
       'Suministro de aire a presión para herramienta neumática, instalaciones industriales y aplicaciones de construcción.',
-    heroPhoto: 'compresores.jpg',
+    heroPhoto: 'compresores.webp',
     heroAlt: 'Compresor de aire para construcción en obra',
-    featurePhoto: 'eq-compresores.jpg',
+    featurePhoto: 'eq-compresores.webp',
     featureAlt: 'Compresor de aire industrial en sitio',
     featureTitle: 'Aire a presión para tu herramienta y proceso',
     featureDesc:
@@ -136,9 +136,9 @@ export const categorias: Categoria[] = [
       'Renta de soldadoras y herramienta profesional para trabajo industrial y de construcción en Puebla y región centro. Entrega en sitio y servicio técnico.',
     intro:
       'Equipos de soldadura y herramienta profesional para trabajo industrial, estructuras y construcción.',
-    heroPhoto: 'soldadoras.jpg',
+    heroPhoto: 'soldadoras.webp',
     heroAlt: 'Soldadora profesional en trabajo industrial',
-    featurePhoto: 'soldadoras.jpg',
+    featurePhoto: 'soldadoras.webp',
     featureAlt: 'Equipo de soldadura para construcción y estructuras',
     featureTitle: 'Equipos listos para trabajo pesado',
     featureDesc:
@@ -169,9 +169,9 @@ export const categorias: Categoria[] = [
       'Renta de maquinaria ligera para construcción en Puebla: compactadoras, bailarinas, cortadoras y equipo de demolición y perforación. Entrega en sitio.',
     intro:
       'Compactación, corte, demolición y perforación para obra civil y edificación, con equipo confiable listo para trabajar.',
-    heroPhoto: 'g-maniobra.jpg',
+    heroPhoto: 'g-maniobra.webp',
     heroAlt: 'Maniobra con maquinaria ligera en obra de construcción',
-    featurePhoto: 'g-maniobra.jpg',
+    featurePhoto: 'g-maniobra.webp',
     featureAlt: 'Maquinaria ligera para compactación y obra civil',
     featureTitle: 'La maquinaria que tu obra necesita, cuando la necesita',
     featureDesc:
@@ -187,6 +187,7 @@ export const categorias: Categoria[] = [
     waText: 'Hola, me interesa cotizar maquinaria ligera para obra.',
     faq: [
       { q: '¿Qué maquinaria ligera puedo rentar?', a: 'Compactadoras y bailarinas vibratorias, apisonadores, cortadoras de pavimento, rotomartillos y equipo de demolición y perforación.' },
+      { q: '¿Rentan maquinaria pesada como excavadoras, retroexcavadoras o grúas?', a: 'No. Nos especializamos en maquinaria ligera para construcción; no manejamos maquinaria pesada como excavadoras, retroexcavadoras, grúas, bulldozers ni motoconformadoras. Si necesitas compactación, corte, demolición o perforación con equipo ligero, es justo lo que rentamos.' },
       { q: '¿Para qué obras sirve la maquinaria ligera?', a: 'Para compactación de suelos, corte de pavimento, demolición, perforación y trabajos de obra civil y edificación.' },
       { q: '¿Entregan la maquinaria en sitio?', a: 'Sí, la llevamos a tu obra en Puebla y la región centro, lista para trabajar.' },
       { q: '¿Se renta por día?', a: 'Sí. Rentamos por el tiempo que necesites, desde un día hasta la duración completa de la obra.' },

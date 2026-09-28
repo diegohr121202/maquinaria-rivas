@@ -15,8 +15,8 @@ const faqSchema = {
 };
 ---
 <Base
-  title="Contacto | Cotiza tu planta de luz o maquinaria — Rivas Puebla"
-  description="Contáctanos para rentar plantas de luz y maquinaria en Puebla y región centro. Cotiza por WhatsApp al 222 320 0109. Respondemos en horario de oficina."
+  title="Contacto | Cotiza tu planta de luz o maquinaria ligera — Rivas Puebla"
+  description="Contáctanos para rentar plantas de luz y maquinaria ligera para construcción en Puebla y región centro. Cotiza por WhatsApp al 222 320 0109. Respondemos en horario de oficina."
   schema={faqSchema}
 >
   <section class="sec pagehead">
@@ -37,7 +37,6 @@ const faqSchema = {
           <h2 style="font-weight:500;font-size:clamp(22px,3vw,28px);letter-spacing:-0.01em;margin-bottom:18px">Datos de contacto</h2>
           <div class="datalist">
             <div class="r"><span class="rk">WhatsApp</span><span class="rv"><a href={wa()} target="_blank" rel="noopener">{site.phone}</a></span></div>
-            <div class="r"><span class="rk">Teléfono</span><span class="rv"><a href={`tel:${site.phoneE164}`}>{site.phone}</a></span></div>
             <div class="r"><span class="rk">Correo</span><span class="rv">{site.email ? <a href={`mailto:${site.email}`}>{site.email}</a> : <span class="pend">Por confirmar</span>}</span></div>
             <div class="r"><span class="rk">Dirección</span><span class="rv">{site.address ? <a href={mapsLink()} target="_blank" rel="noopener">{site.address}</a> : <span class="pend">Por confirmar</span>}</span></div>
             <div class="r"><span class="rk">Horario</span><span class="rv">{site.hours ?? <span class="pend">Por confirmar</span>}</span></div>
@@ -60,7 +59,6 @@ const faqSchema = {
           <h2>Cotiza en minutos</h2>
           <p>La forma más rápida de cotizar es por WhatsApp. Te respondemos en horario de oficina.</p>
           <a class="btn filled state" href={wa()} target="_blank" rel="noopener" style="width:100%">Escribir por WhatsApp</a>
-          <a class="btn outlined state" href={`tel:${site.phoneE164}`} style="width:100%;margin-top:12px">Llamar {site.phone}</a>
         </div>
       </div>
     </div>

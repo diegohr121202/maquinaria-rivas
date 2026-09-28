@@ -3,7 +3,7 @@ title: "Mantenimiento preventivo de plantas de luz: guía esencial"
 description: "El mantenimiento preventivo es la revisión programada de tu planta de luz para que arranque cuando la necesitas. Qué incluye, cada cuándo hacerlo y por qué."
 pubDate: 2026-08-17
 author: "Equipo Maquinaria Rivas"
-heroImage: "/assets/photos/mantenimiento.jpg"
+heroImage: "/assets/photos/mantenimiento.webp"
 heroAlt: "Técnico realizando mantenimiento preventivo a un generador"
 category: "Mantenimiento"
 tags: ["mantenimiento", "plantas de luz", "servicio técnico"]

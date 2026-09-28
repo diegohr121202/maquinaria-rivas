@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import { categorias } from '../data/categorias';
+import { wa } from '../data/site';
+---
+<Base
+  title="Página no encontrada (404) | Maquinaria Rivas"
+  description="La página que buscas no existe o cambió de dirección. Explora nuestro catálogo de plantas de luz y maquinaria ligera para construcción en Puebla."
+>
+  <section class="sec pagehead">
+    <div class="wrap">
+      <div class="pagehead" style="border-bottom:0;padding-bottom:0">
+        <span class="over">Error 404</span>
+        <h1>No encontramos esta página</h1>
+        <p>Puede que el enlace esté roto o que la página haya cambiado de dirección. Te dejamos los accesos más útiles para seguir.</p>
+        <div class="hero-actions" style="margin-top:8px">
+          <a class="btn filled state" href="/">Ir al inicio</a>
+          <a class="btn text state" href={wa()} target="_blank" rel="noopener">Cotizar por WhatsApp →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:clamp(28px,4vw,44px)">
+    <div class="wrap">
+      <div class="sec-head reveal"><div>
+        <span class="over">Explora</span>
+        <h2>Lo que puedes rentar con nosotros</h2>
+      </div></div>
+      <div class="cards c3">
+        {categorias.map((c) => (
+          <a class="card reveal" href={`/${c.slug}/`} style="text-decoration:none">
+            <div class="media"><img src={`/assets/photos/${c.heroPhoto}`} alt={c.heroAlt} loading="lazy" /></div>
+            <div class="body"><h3>{c.kicker}</h3><p>{c.intro}</p></div>
+            <div class="actions"><span class="btn text state" style="pointer-events:none">Ver categoría →</span></div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

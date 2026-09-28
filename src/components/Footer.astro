@@ -8,7 +8,7 @@ const year = 2026;
       <!-- Col 1: Marca -->
       <div class="ft-brandcol">
         <div class="em"><img src="/assets/emblem.png" alt="Maquinaria Rivas" width="40" height="40"><b>Maquinaria Rivas</b></div>
-        <p class="ft-desc">Empresa familiar desde {site.foundedYear}. Renta, venta y servicio técnico de plantas de luz y maquinaria en {site.coverage}.</p>
+        <p class="ft-desc">Empresa familiar desde {site.foundedYear}. Renta, venta y servicio técnico de plantas de luz y maquinaria ligera para construcción en {site.coverage}.</p>
       </div>
 
       <!-- Col 2 (centro): Contacto -->
@@ -16,7 +16,6 @@ const year = 2026;
         <h4>Contacto</h4>
         <div class="ft-contact">
           <a href={wa()} target="_blank" rel="noopener">WhatsApp · {site.phone}</a>
-          <a href={`tel:${site.phoneE164}`}>Tel. {site.phone}</a>
           {site.email && <a href={`mailto:${site.email}`}>{site.email}</a>}
           <a href={mapsLink()} target="_blank" rel="noopener">{site.addressStreet}, {site.addressNeighborhood}, {site.postalCode} {site.locality}</a>
         </div>

@@ -3,7 +3,8 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppFab from '../components/WhatsAppFab.astro';
-import { site } from '../data/site';
+import { site, mapsLink } from '../data/site';
+import { categorias } from '../data/categorias';
 
 interface Props {
   title: string;
@@ -18,7 +19,7 @@ interface Props {
 const {
   title,
   description,
-  image = '/assets/photos/hero.jpg',
+  image = '/assets/photos/hero.webp',
   imageAlt = 'Planta de luz Rivas en operación en Puebla',
   fabText,
   preloadImage,
@@ -38,14 +39,37 @@ const localBusiness = {
   description: site.schemaDescription,
   url: homeUrl,
   logo: new URL('/assets/emblem.png', Astro.site).href,
-  image: ogImage,
+  image: [
+    ogImage,
+    new URL('/assets/photos/planta-destacada.webp', Astro.site).href,
+    new URL('/assets/photos/g-maniobra.webp', Astro.site).href,
+  ],
   telephone: site.phoneE164,
+  hasMap: mapsLink(),
   ...(site.social.length ? { sameAs: site.social } : {}),
   priceRange: '$$',
+  currenciesAccepted: 'MXN',
   foundingDate: String(site.foundedYear),
-  slogan: 'Renta de plantas de luz y maquinaria para construcción desde 1999.',
+  slogan: 'Renta de plantas de luz y maquinaria ligera para construcción desde 1999.',
   knowsLanguage: 'es-MX',
-  areaServed: { '@type': 'Place', name: site.coverage },
+  // Cobertura: nombre general + ciudades específicas (SEO local).
+  areaServed: [
+    { '@type': 'Place', name: site.coverage },
+    ...site.areaCities.map((c) => ({ '@type': 'City', name: c })),
+  ],
+  // Catálogo de servicios: le dice a Google/AEO exactamente qué rentamos.
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Renta de plantas de luz y maquinaria ligera',
+    itemListElement: categorias.map((c) => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: c.serviceType,
+        url: new URL(`/${c.slug}/`, Astro.site).href,
+      },
+    })),
+  },
   contactPoint: {
     '@type': 'ContactPoint',
     telephone: site.phoneE164,
@@ -79,7 +103,14 @@ const schemas = [localBusiness, ...(Array.isArray(schema) ? schema : schema ? [s
   <title>{title}</title>
   <meta name="description" content={description} />
   <meta name="theme-color" content="#3F7F1E" />
+  <!-- Indexación y previews enriquecidos en buscadores/AEO -->
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="author" content={site.legalName} />
+  <!-- Señales geográficas (SEO local) -->
+  <meta name="geo.region" content="MX-PUE" />
+  <meta name="geo.placename" content={site.locality} />
   <link rel="canonical" href={canonical} />
+  <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
@@ -98,6 +129,9 @@ const schemas = [localBusiness, ...(Array.isArray(schema) ? schema : schema ? [s
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
   {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+  {site.analytics.plausibleDomain && (
+    <script defer data-domain={site.analytics.plausibleDomain} src="https://plausible.io/js/script.js"></script>
+  )}
 </head>
 <body>
   <Header />

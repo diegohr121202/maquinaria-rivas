@@ -3,7 +3,7 @@ title: "¿Qué capacidad de planta de luz necesito? Guía de kVA"
 description: "Para acertar en los kVA de tu planta de luz, divide tu carga en kW entre 0.8 y suma 20–25 % de margen. Guía con ejemplos para obra, industria y eventos."
 pubDate: 2026-08-10
 author: "Equipo Maquinaria Rivas"
-heroImage: "/assets/photos/planta-destacada.jpg"
+heroImage: "/assets/photos/planta-destacada.webp"
 heroAlt: "Planta de luz diésel de gran capacidad en operación"
 category: "Guías"
 tags: ["plantas de luz", "kVA", "generadores"]

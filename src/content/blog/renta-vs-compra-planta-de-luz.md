@@ -3,7 +3,7 @@ title: "Renta vs. compra de planta de luz: ¿qué conviene?"
 description: "Renta si el uso es temporal y quieres cero inversión inicial; compra si el uso será permanente por años. Compara criterios de flujo, mantenimiento y utilización."
 pubDate: 2026-08-24
 author: "Equipo Maquinaria Rivas"
-heroImage: "/assets/photos/g-flotilla.jpg"
+heroImage: "/assets/photos/g-flotilla.webp"
 heroAlt: "Flotilla de plantas de luz de Maquinaria Rivas"
 category: "Guías"
 tags: ["plantas de luz", "renta", "compra"]

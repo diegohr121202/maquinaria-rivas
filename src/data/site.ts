@@ -5,16 +5,30 @@
 export const site = {
   name: 'Maquinaria Rivas',
   legalName: 'Renta de Maquinaria Rivas, S.A. de C.V.',
-  tagline: 'Renta de plantas de luz y maquinaria para construcción en Puebla y región centro.',
+  tagline: 'Renta de plantas de luz y maquinaria ligera para construcción en Puebla y región centro.',
   // Descripción semántica para el schema: enfocada al problema del cliente
   // (mantener energía y operación sin interrupciones), sin adjetivos vacíos.
+  // Aclara el alcance (ligera, no pesada) para atraer el lead correcto.
   schemaDescription:
-    'Renta, venta y servicio técnico de plantas de luz y maquinaria para construcción en Puebla y la región centro. Entregamos e instalamos generadores diésel de 45 a 700 kVA en sitio para mantener la energía y la operación de obras, industria y eventos sin interrupciones.',
+    'Renta, venta y servicio técnico de plantas de luz y maquinaria ligera para construcción en Puebla y la región centro. Entregamos e instalamos generadores diésel de 45 a 700 kVA, compresores, torres de iluminación, soldadoras, compactadoras y equipo de demolición en sitio. Nos especializamos en maquinaria ligera; no rentamos maquinaria pesada como excavadoras, retroexcavadoras, grúas ni bulldozers.',
   foundedYear: 1999,
   phone: '222 320 0109',
   phoneE164: '+522223200109',
   whatsappNumber: '522223200109',
   coverage: 'Puebla y región centro del país',
+
+  // Ciudades/zonas específicas para `areaServed` del schema (SEO local).
+  // Ampliar conforme se confirmen zonas de entrega reales.
+  areaCities: [
+    'Puebla',
+    'Heroica Puebla de Zaragoza',
+    'San Andrés Cholula',
+    'San Pedro Cholula',
+    'Atlixco',
+    'Cuautlancingo',
+    'Amozoc',
+    'Tlaxcala',
+  ],
 
   // Dirección (confirmada por el cliente).
   address: '5 de Mayo 5203, Adolfo López Mateos, 72240 Heroica Puebla de Zaragoza, Pue.',
@@ -36,6 +50,12 @@ export const site = {
   // Pendientes de confirmar:
   email: null as string | null,          // ej. 'contacto@maquinariarivas.com'
   hours: null as string | null,          // ej. 'Lun–Vie 8:00–18:00 · Sáb 9:00–14:00'
+
+  // Analítica sin cookies (Plausible). Al poner el dominio se activa el script;
+  // null = desactivada. Alternativas equivalentes: Umami, Vercel Web Analytics.
+  analytics: {
+    plausibleDomain: null as string | null,   // ej. 'maquinariarivas.com'
+  },
 };
 
 // Enlace a Google Maps (búsqueda/direcciones).
